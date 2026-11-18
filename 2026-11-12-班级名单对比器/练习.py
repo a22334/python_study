@@ -21,7 +21,14 @@ import random   # 练习 3 会用到
 #   原来 10 个数字，去重后剩 7 个
 #   去重后：1 2 3 4 5 6 9
 def practice1():
-    pass  # ← 删掉 pass，写你的代码
+    number = input('请输入一串数字(用空格隔开):')
+    number_list = [int(x) for x in number.split(' ')]
+    number_set = set()
+    for number in number_list:
+        number_set.add(number)  #可以简化为 number_set = set(number_list)
+    result = sorted(number_set) #sorted()为内置函数
+    print(f'原来{len(number_list)}个数字 , 去重后剩{len(result)}个')
+    print('去重后:' , *result) # *列表 自动拆包
 
 # ---------------- 练习 2：名单查询 ----------------
 # 写 practice2()：
@@ -35,7 +42,39 @@ def practice1():
 #   4. 输入 q 退出查询
 # 提示：判断用 "名字" in 集合；可以用上一题的方法读名单
 def practice2():
-    pass  # ← 删掉 pass，写你的代码
+    a_set = set()
+    b_set = set()
+    while True:
+        name = input('请输入A班学生的名字(输入end结束):')
+        if name.lower() == 'end':
+            break
+        elif name in a_set:
+            print(f'{name}已存在!!')
+        else:
+            a_set.add(name)
+    while True:
+        name = input('请输入B班学生的名字(输入end结束):')
+        if name.lower() == 'end':
+            break
+        elif name in b_set:
+            print(f'{name}已存在!!')
+        else:
+            b_set.add(name)
+
+    while True:
+        choice = input('请输入要查询的学生的名字(输入q退出):')
+        if choice == 'q':
+            break
+        elif choice in (a_set - b_set):
+            print('在A班')
+        elif choice in (b_set - a_set):
+            print('在B班')
+        elif choice in (a_set | b_set):
+            print('两个班都有')
+        else:
+            print('两个班都不在')
+
+            
 
 # ---------------- 练习 3：彩票号码生成器（挑战题） ----------------
 # 写 practice3()：
@@ -46,10 +85,21 @@ def practice2():
 #   4. 问"再来一组？(y/n)"，y 就再生成一组
 # 加分项：再加 1 个 1~16 的特别号（不要求和前 6 个不重复）
 def practice3():
-    pass  # ← 删掉 pass，写你的代码
+    number = set()
+    while len(number) < 6 :
+        number.add(random.randint(1,33))
+    special_list = list(number)
+    special_list.append(random.randint(1,16))
+    print(f'本期号码:{sorted(number)}')
+    choice = input('再来一组?(y/n)')
+    match choice.lower():
+        case 'y':
+            practice3()
+        case 'n':
+            print('再见!')
 
 # ---------------- 运行入口 ----------------
 # 一次只运行一个练习：把要运行那一行的 # 删掉即可
-# practice1()
-# practice2()
-# practice3()
+practice1()
+practice2()
+practice3()
