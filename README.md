@@ -61,3 +61,13 @@ for movie, year in p1:
 4. 集合的内容 set_a - set_b (在a不在b) set_a | set_b (a并b) set_a & set_b (a∩b)
 5. 集合可以直接转换为列表 list_1 = list(set) 同理 列表也可以转换为集合 set_1 = set(list)
 6. 对比于列表 集合的好处是可以自动去重 可以去重的还有元组
+
+
+## 2026.11.19学习内容:数字魔法工厂
+
+今天的内容大多都是列表推导式
+
+我从中学到的内容是:
+
+1. 列表推导式可以添加if进行筛选 list = [x for x in list if condition]
+2. 列表推导式中的内容可以用函数 list = [int(x) for x in list.split() if condition]
