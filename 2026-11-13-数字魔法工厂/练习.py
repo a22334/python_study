@@ -18,8 +18,23 @@
 #   请输入摄氏温度（空格隔开）：0 20 37 100
 #   华氏温度：[32.0, 68.0, 98.6, 212.0]
 def practice1():
-    pass  # ← 删掉 pass，写你的代码
-
+    while True:
+        temper = input('请输入一串摄氏温度(用空格隔开):')
+        temper_list = []
+        run = True
+        try:
+            temper_list = [float(x) for x in temper.split()]
+        except ValueError:
+            run = False
+        if not run or len(temper_list) == 0:
+            print('输入有误 请输入整数')
+        else:
+            temperature_list = [x * 9/5 + 32 for x in temper_list]
+            for x in temperature_list:
+                print(f'{x:.1f}')
+            break
+        
+    
 # ---------------- 练习 2：筛选与变换 ----------------
 # 写 practice2()：
 #   1. 输入一串数字（可正可负），例如：3 -1 4 -1 5 -9
@@ -33,7 +48,17 @@ def practice1():
 #   能被 3 整除：[3, -9]
 #   相反数：[-3, 1, -4, 1, -5, 9]
 def practice2():
-    pass  # ← 删掉 pass，写你的代码
+    while True:
+        number = input('请输入一串数字(可正可负):')
+        positice_number = [float(x) for x in number.split() if float(x) > 0]
+        negtive_number = [float(x) for x in number.split() if float(x) < 0]
+        three_number = [float(x) for x in number.split() if float(x) % 3 == 0]
+        opposite_number = [float(x) * -1 for x in number.split()]
+        print(positice_number)
+        print(negtive_number)
+        print(three_number)
+        print(opposite_number)
+        break
 
 # ---------------- 练习 3：单词长度统计（挑战题） ----------------
 # 写 practice3()：
@@ -49,10 +74,18 @@ def practice2():
 #   平均长度：4.4
 #   超过 3 个字母的单词：['python', 'great', 'language']
 def practice3():
-    pass  # ← 删掉 pass，写你的代码
-
+    words = input('请输入一句话:')
+    words_list = words.split(' ')
+    every_word_len = [len(x) for x in words_list]
+    for number in range(0,len(words_list)):
+        print(words_list[number],every_word_len[number])
+    print(max(every_word_len))
+    print(f'{sum(every_word_len)/len(every_word_len):.1f}')
+    print(f'超过3个字母的单词{[w for w in words_list if len(w) > 3 ]}')
+    
+        
 # ---------------- 运行入口 ----------------
 # 一次只运行一个练习：把要运行那一行的 # 删掉即可
-# practice1()
-# practice2()
-# practice3()
+practice1()
+practice2()
+practice3()
