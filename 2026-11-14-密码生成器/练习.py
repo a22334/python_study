@@ -10,6 +10,11 @@
 
 import random
 
+LOWERS = "abcdefghijklmnopqrstuvwxyz"
+UPPERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+DIGITS = "0123456789"
+SYMBOLS = "!@#$%^&*"
+ALL = LOWERS + UPPERS + DIGITS + SYMBOLS
 # ---------------- 练习 1：密码强度判断器 ----------------
 # 写 practice1()：
 #   1. 输入一个密码
@@ -25,7 +30,34 @@ import random
 #   请输入密码：12345
 #   密码强度：弱
 def practice1():
-    pass  # ← 删掉 pass，写你的代码
+    password = input('请输入一串密码:')
+    len_of_password = len(password)
+    have_digit = False
+    have_upper = False
+    have_lower = False
+    for _ in password:
+        if _ in UPPERS:
+            have_upper = True
+            break
+
+    for _ in password:
+        if _ in LOWERS:
+            have_lower = True
+            break
+
+    for _ in password:
+        if _ in DIGITS:
+            have_digit = True
+            break
+
+    #以上3个for循环均可修改 ...①
+
+    if len_of_password >= 8 and have_digit and have_upper and have_lower:
+        print('强')
+    elif len_of_password >= 8 and have_digit:
+        print('中')
+    else:
+        print('弱')
 
 # ---------------- 练习 2：骰子点数统计 ----------------
 # 写 practice2()：
@@ -39,7 +71,19 @@ def practice1():
 #   出现过的点数：[1, 2, 3, 4, 5, 6]，共 6 种
 #   各点数次数：{1: 3, 2: 4, 3: 3, 4: 3, 5: 4, 6: 3}
 def practice2():
-    pass  # ← 删掉 pass，写你的代码
+    while True:
+        try:
+            counts = int(input('请输入要投掷的次数'))
+            break
+        except ValueError:
+            print('请输入数字!')
+    
+    dian_list = [random.randint(1,6) for _ in range(counts)]
+    dian_set = set(dian_list)
+    dian_emerge_count = { x : dian_list.count(x) for x in dian_set }
+    print(f'输出过的点数有:{sorted(dian_set)} 共有:{len(dian_set)}种')
+    print(f'各点数次数:{dian_emerge_count}')
+        
 
 # ---------------- 练习 3：单词首字母字典（挑战题） ----------------
 # 写 practice3()：
@@ -57,10 +101,26 @@ def practice2():
 #   g: ['go']
 #   首字母集合：{'g', 'j', 'p'}
 def practice3():
-    pass  # ← 删掉 pass，写你的代码
+    sentence = input('请输入一句话')
+    sentence_list = sentence.split(" ")
+    sentence_set = set()
+    capital_dict = {}
 
+    for word in sentence_list:
+        sentence_set.add(word[0])
+
+    for x in sentence_set:
+        for word in sentence_list:
+            if word[0] == x:
+                capital_dict.setdefault(x,[]).append(word)
+
+    for key,value in capital_dict.items():
+        print(f'{key}:{value}')
+    
+
+    print(f'出现过的首字母有{sentence_set}')
 # ---------------- 运行入口 ----------------
 # 一次只运行一个练习：把要运行那一行的 # 删掉即可
-# practice1()
-# practice2()
-# practice3()
+practice1()
+practice2()
+practice3()
