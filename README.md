@@ -71,3 +71,36 @@ for movie, year in p1:
 
 1. 列表推导式可以添加if进行筛选 list = [x for x in list if condition]
 2. 列表推导式中的内容可以用函数 list = [int(x) for x in list.split() if condition]
+
+
+## 2026.11.21学习内容:密码生成器
+
+今天首先在readme文件中学习到了另外两个推导式:
+
+1. 字典推导式 {x : x**2 for x in ...}
+2. 集合推导式 {x for x in ...}
+3. 在练习一中 我有3个内容几乎一致的for循环 它们可以修改的更加精准
+   以第一个for循环为例子
+   ```python
+   for _ in password:
+        if _ in UPPERS:
+            have_upper = True
+            break
+   ```
+   这里可以将其改为
+   ```python
+   any(x in UPPERS for x in password)
+   ```
+   这样子代码变得更加简洁
+   其中它还有个all()函数 判断条件是要所有都符合才可以
+5. setdefault()函数
+   在练习3中
+   在代码中遇到的问题是这样的
+   要录入的字典是空字典 原本我认为的键值对创建是这样的 dict[n] = value
+   但是在这题中对应的值是一个列表 而我录入值的过程是一个循环
+   这样子就会出现一个问题:当对应的键同时出现2个相对应的值以上时 那么前面的值就会被覆盖
+   因为ai给我的建议就是使用setdefault()函数
+   dict.setdefault(key,[]).append(value)
+   这样子就可以一个值对应一个列表 前面的值就不会被覆盖了
+   
+   
